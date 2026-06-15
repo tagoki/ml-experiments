@@ -1,0 +1,56 @@
+# 🏬 sneakerFAQ
+
+**sneakerFAQ** — это теоретический магазин кроссовок с системой FAQ, которая отвечает на общие вопросы о магазине и на вопросы о конкретных кроссовках.
+
+- Данные о кроссовках хранятся в базе данных SQLite (`db_main.db`).  
+- Общие вопросы о магазине и кроссовках хранятся в JSON-файлах.  
+- В начале проекта нет модели — скрипт автоматически скачивает её при первом запуске `main.py`.  
+
+Более подробно про модель FAQ читайте в репозитории [🧠 NLP FAQ Bot](https://github.com/tagoki/nlp-faq-model).
+
+---
+
+## ⚠️ Внимание
+
+API-ключ в файле `bot.py` **деактивирован**. Чтобы бот работал:
+
+1. Создайте свой API-ключ.  
+2. Замените ключ в файле  `bot.py` на свой.
+---
+
+## 🐳 Запуск через Docker
+
+### 1️⃣ Установите Docker
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop) для Windows/Mac  
+- Для Linux:
+
+```bash
+sudo apt update
+sudo apt install docker.io docker-compose -y
+```
+Проверка установки:
+```bash
+docker --version
+docker-compose --version
+```
+
+### 2️⃣ Клонируйте репозиторий
+```bash
+git clone https://github.com/username/sneakerFAQ.git
+cd sneakerFAQ
+```
+
+### 3️⃣ Сборка Docker-образа
+```bash
+docker build -t sneaker-faq-bot .
+```
+
+### 4️⃣ Запуск контейнера
+```bash
+docker run -it \
+  -v ${PWD}/data:/app/data \
+  -v ${PWD}/models:/app/models \
+  -v ${PWD}/db_main.db:/app/db_main.db \
+  sneaker-faq-bot
+```
